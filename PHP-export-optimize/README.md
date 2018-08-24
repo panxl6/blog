@@ -76,6 +76,8 @@ checkout代码：`git checkout exportV2`
 
 访问[http://localhost:8000/Index/Index/exportUserV2](http://localhost:8000/Index/Index/exportUserV2)，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本1的导出上限。
 
+请确保tp5/public/static有读写权限。简单粗暴的授权方式 `chmod a+rwx -R tp5/public/static`
+
 ### 版本3
 
 运行swoole服务器
