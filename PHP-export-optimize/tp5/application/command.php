@@ -11,4 +11,5 @@
 
 return [
     'app\index\command\Test',
+    'app\index\command\Server',
 ];
