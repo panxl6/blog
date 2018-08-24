@@ -74,7 +74,7 @@ checkout代码：`git checkout exportV1`
 
 checkout代码：`git checkout exportV2`
 
-访问[http://localhost:8000/Index/Index/exportUserV2](http://localhost:8000/Index/Index/exportUserV2)，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本1的导出上限。
+访问[http://localhost:8000/Index/Index/exportUserV2](http://localhost:8000/Index/Index/exportUserV2)，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本2的导出上限。一般而言，上限会比版本1高5倍，或者更高。
 
 请确保tp5/public/static有读写权限。简单粗暴的授权方式 `chmod a+rwx -R tp5/public/static`
 
