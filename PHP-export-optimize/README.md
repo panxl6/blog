@@ -60,7 +60,7 @@ checkout代码：`git checkout mock-data`
 
 #### Hello World
 
-`php -S 0.0.0.0:8000 public/index.php`
+`php -S 0.0.0.0:8000 -t ./public`
 
 访问[http://localhost:8000/](http://localhost:8000/)能看到输出，说明部署好了。端口可以修改。localhost也可以改成自己的IP或者域名。
 
@@ -80,7 +80,13 @@ checkout代码：`git checkout exportV2`
 
 ### 版本3
 
-运行swoole服务器
+运行swoole服务器。请确保public/static具有读写权限。
 
 `php think server`
+
+访问版本3的URL[http://localhost:8000/Index/Index/exportUserV3](http://localhost:8000/Index/Index/exportUserV3)，提交任务。接口将会返回任务执行成功后的文件下载url。
+
+例如：http://www.panxl.cn:8000/static/temp1535095215.csv
+
+此时，版本3的导出上限，理论上不受限制。比版本1高出数十倍。
 
