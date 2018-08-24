@@ -68,7 +68,7 @@ checkout代码：`git checkout mock-data`
 
 checkout代码：`git checkout exportV1`
 
-访问[http://localhost:8000/index.php/Index/Index/exportUserV1](http://localhost:8000/Index/Index/exportUserV1)，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本1的导出上限。
+访问[http://localhost:8000/Index/Index/exportUserV1](http://localhost:8000/Index/Index/exportUserV1)，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本1的导出上限。
 
 ### 版本2
 
