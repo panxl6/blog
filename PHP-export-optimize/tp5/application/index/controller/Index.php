@@ -89,4 +89,23 @@ class Index
         readfile($path);
         unlink($path);
     }
+
+    public function exportUserV3()
+    {
+        $client = new \swoole_client(SWOOLE_SOCK_TCP);
+        if (!$client->connect('127.0.0.1', 9501, 1)) {
+            var_dump($client->errMsg);
+            // echo "Error: {$client->errMsg}[$client->errCode]\n";
+        }
+
+        // 耗时任务投递给TaskWorker
+        // 在Swoole中调用thinkphp5的Db类进行操作
+        $msg = "select * from t_user limit 1";
+        $client->send($msg);
+
+        $ret = $client->recv();
+
+        $downloadLink = 'http://'.$_SERVER['HTTP_HOST'].'/static/'.$ret;
+        echo '请在任务完成后(5分钟后)下载，下载链接:', $downloadLink;
+    }
 }
