@@ -46,4 +46,47 @@ class Index
         header('Content-Disposition: attachment; filename="file.xlsx"');
         $writer->save("php://output");
     }
+
+    // 版本2
+    public function exportUserV2()
+    {
+        $path = Env::get('root_path').'public/static/temp'.time().'.csv';
+        $file = fopen($path, 'w+');
+        if ($file === false)
+            exit('无法创建临时文件');
+
+        $pageSize = 500;
+        $pageNum = 0;
+
+        while (true) {
+            $ret = Db::table('t_user')
+                    ->field('id,nickname,mobile,email') // 避免select *
+                    ->limit($pageNum*$pageSize, $pageSize) // 分页
+                    ->select();
+
+            if (empty($ret) || $pageNum>5)
+                break;
+            $pageNum++;
+
+            // 写入文件
+            $i = 0;
+            $buffer = '';
+            foreach ($ret as $key => $value) {
+                $buffer .= implode(',', $value)."\n";
+                if ($i%100 == 0){
+                    fwrite($file, $buffer);
+                }
+            }
+        }
+
+        fclose($file);
+        ob_end_clean();
+        header("Pragma: public");
+        header("Expires: 0");
+        header('Content-type: text/plain');
+        header('Content-Length: '.filesize($path));
+        header('Content-Disposition:attachment;filename="导出用户.csv"');
+        readfile($path);
+        unlink($path);
+    }
 }
