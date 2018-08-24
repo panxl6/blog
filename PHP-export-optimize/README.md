@@ -62,13 +62,13 @@ checkout代码：`git checkout mock-data`
 
 `php -S 0.0.0.0:8000 public/index.php`
 
-访问http://localhost:8000/能看到输出，说明部署好了。端口可以修改。localhost也可以改成自己的IP或者域名。
+访问[http://localhost:8000/](http://localhost:8000/)能看到输出，说明部署好了。端口可以修改。localhost也可以改成自己的IP或者域名。
 
 ### 版本1
 
 checkout代码：`git checkout exportV1`
 
-访问http://localhost:8000/index.php/Index/exportUserV1，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本1的导出上限。
+访问[http://localhost:8000/index.php/Index/Index/exportUserV1](http://localhost:8000/Index/Index/exportUserV1)，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本1的导出上限。
 
 ### 版本2
 
