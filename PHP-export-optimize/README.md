@@ -6,14 +6,16 @@
 
 ```bash
 # 1. 安装thinkphp 5.1
-composer create-project topthink/think=5.1.x-dev tp5
+composer create-project topthink/think=5.1 tp5
 # 2. 安装Excel读写类库
 composer require phpoffice/phpspreadsheet
+# 3. 安装Swoole扩展
+sudo pecl install swoole
 ```
 
 
 
-**数据表**
+**数据表设计**
 
 ```sql
 CREATE DATABASE demo DEFAULT CHARSET utf8mb4;
@@ -45,16 +47,28 @@ CREATE TABLE `t_user` (
   `bank_card` varchar(64) NOT NULL DEFAULT '',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
 
 
-**生成模拟数据**
+**生成模拟数据**(200000条)
+
+checkout代码：`git checkout mock-data`
 
 `php think test`
 
+#### Hello World
+
+`php -S 0.0.0.0:8000 public/index.php`
+
+访问[http://localhost:8000/](http://localhost:8000/)能看到输出，说明部署好了。端口可以修改。localhost也可以改成自己的IP或者域名。
+
 ### 版本1
+
+checkout代码：`git checkout exportV1`
+
+访问[http://localhost:8000/Index/Index/exportUserV1](http://localhost:8000/Index/Index/exportUserV1)，即可导出文件。你可以修改导出条数，直至接口崩溃。此时，你将得到版本1的导出上限。
 
 ### 版本2
 
