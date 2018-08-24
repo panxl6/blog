@@ -80,6 +80,8 @@ checkout代码：`git checkout exportV2`
 
 ### 版本3
 
+checkout代码：`git checkout exportV3`
+
 运行swoole服务器。请确保public/static具有读写权限。
 
 `php think server`
