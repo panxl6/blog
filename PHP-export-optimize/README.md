@@ -1,6 +1,6 @@
 ## PHP数据导出优化案例
 
-**主要依赖**
+### 主要依赖
 
 本文以php7.1、thinkphp5.1、swoole4.1为基础
 
@@ -15,7 +15,7 @@ sudo pecl install swoole
 
 
 
-**数据表设计**
+### 数据表设计
 
 ```sql
 CREATE DATABASE demo DEFAULT CHARSET utf8mb4;
@@ -52,7 +52,7 @@ CREATE TABLE `t_user` (
 
 
 
-**生成模拟数据**(200000条)
+### 生成模拟数据(200000条)
 
 checkout代码：`git checkout mock-data`
 
@@ -83,3 +83,4 @@ checkout代码：`git checkout exportV2`
 运行swoole服务器
 
 `php think server`
+
