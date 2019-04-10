@@ -1,17 +1,17 @@
 <?php
 
-class HashTale
+class HashTable
 {
+    
     private $size = 0;
     private $container = null;
     
     private $bigPrime = 1861;
-
+    
     public function __construct($size=1000)
     {
-        // 哈希表大小
-        $this->size = $size;
         // 初始化容器
+        $this->size = $size;
         $this->container = array_fill(0, $size, $this->getItemDefine());
     }
     
@@ -24,7 +24,7 @@ class HashTale
             return $result['value'];
         }
         
-        return null;
+        return $this->findItemInList($result['list'], $key);
     }
     
     public function set($key, $value)
@@ -33,12 +33,19 @@ class HashTale
         
         $result = $this->container[$hashNum];
         
-        $result['key'] = $key;
-        $result['value'] = $value;
+        if ($result['key'] == '') {
+            // 槽位空，直接写入
+            $result['key'] = $key;
+            $result['value'] = $value;
+        } elseif ($result['key'] == $key) {
+            // 更新value
+            $result['value'] = $value;
+        } else {
+            // 解决哈希冲突
+            $this->addItemToList($result['list'], $key, $value);
+        }
         
         $this->container[$hashNum] = $result;
-
-        var_dump($this->container);
         
         return null;
     }
@@ -48,12 +55,39 @@ class HashTale
         $hashNum = $this->hashNum($key);
         $this->container[$hashNum] = $this->getItemDefine();
     }
-
+    
+    private function addItemToList(&$list, $key, $item)
+    {
+        foreach ($list as $curKey => $value) {
+            if ($key == $curKey) {
+                return true;
+            }
+        }
+        
+        // 未找到,将新的键值插入链表
+        $list[$key] = $item;
+        return false;
+    }
+    
+    private function findItemInList($list, $key)
+    {
+        foreach ($list as $curKey => $value) {
+            if ($key == $curKey) {
+                return $value;
+            }
+        }
+        
+        return null;
+    }
+    
     private function getItemDefine()
     {
         $item = array(
             'key' => '',
             'value' => '',
+            
+            // 用于解决哈希冲突的链表
+            'list' => array()
         );
         
         return $item;
@@ -61,12 +95,9 @@ class HashTale
     
     private function hashNum($key)
     {
-        // $key不能太长，$this->bigPrime也不能太大，不然会引起整数溢出
-
         $hashNum = 0;
         $keyLen = strlen($key);
         
-        // 这里的**幂运算你也可以用位移来实现
         for ($i=0; $i<$keyLen; $i++) {
             $hashNum += ($this->bigPrime ** ($keyLen - ($i+1))) * ord($key[$i]);
         }
@@ -77,12 +108,14 @@ class HashTale
     }
 }
 
-$hashTable = new HashTale(2);
-$hashTable->set('hello', 'world');
-var_dump($hashTable);
 
-$hashTable->set('key', 'value');
-var_dump($hashTable);
+$hashTable = new HashTable(2);
 
-$hashTable->set('crash', 'value');
-var_dump($hashTable);
+$hashTable->set('hello', 'value');
+var_dump($hashTable->get('hello'));
+
+$hashTable->set('hello1', 'value1');
+var_dump($hashTable->get('hello1'));
+
+$hashTable->set('hello2', 'value2');
+var_dump($hashTable->get('hello2'));
