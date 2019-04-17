@@ -6,6 +6,8 @@
 #include <arpa/inet.h>
 #include <string.h>
 
+void response(const int* sock);
+
 int main()
 {
     int server_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -30,12 +32,25 @@ int main()
     }
 
     struct sockaddr_in client_addr;
-    socklen_t client_addr_size = sizeof(client_addr);
-    int client_sock = accept(server_sock, (struct sockaddr*)&client_addr, &client_addr_size);
-    if (client_sock == -1) {
-        puts("响应失败");
+
+    while (1) {
+        socklen_t client_addr_size = sizeof(client_addr);
+        int client_sock = accept(server_sock, (struct sockaddr*)&client_addr, &client_addr_size);
+        if (client_sock == -1) {
+            puts("响应失败");
+        }
+
+        response(&client_sock);
     }
 
+    close(server_sock);
+
+    return 0;
+}
+
+void response(const int* sock)
+{
+    int client_sock = *sock;
     char status[] = "HTTP/1.0 200 OK\r\n";
     char header[] = "serverer: A Simple Web serverer\r\nContent-Type: text/html\r\n\r\n";
     char content[] = "hello world";
@@ -45,7 +60,4 @@ int main()
     write(client_sock, content, strlen(content));
 
     close(client_sock);
-    close(server_sock);
-
-    return 0;
 }
