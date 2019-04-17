@@ -1,5 +1,6 @@
 # 简单的静态文件web服务器
 
+## Hello world
 ### 编译运行
 `g++ main.c -o main && main`
 
