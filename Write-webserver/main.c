@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <pthread.h>
 
 // 编译前，请替换你的实际html文件所在目录
 #define HTML_DIR "/home/panxl/CLionProjects/multiprocess/html/"
@@ -20,6 +21,7 @@ void response(const int* sock, RESPONSE response);
 RESPONSE get_content_by_url(const char* url);
 RESPONSE get_404();
 RESPONSE get_normal_response(const char* str);
+void *request_handler(void *p);
 
 
 int main()
@@ -47,7 +49,7 @@ int main()
         return -1;
     }
 
-    int pid;
+    pthread_t thread_id;
     int count = 0;
     struct sockaddr_in client_addr;
 
@@ -59,21 +61,8 @@ int main()
             continue;
         }
 
-        // fork
-        pid = fork();
-        if (pid < 0) {
-            puts("子进程创建失败");
-            continue;
-        }
-
-        if (pid == 0) {
-            close(server_sock);
-            response(&client_sock, request(&client_sock));
-            printf("子进程处理完了, pid: %d\n", getpid());
-            exit(0);
-        } else {
-            close(client_sock);
-        }
+        pthread_create(&thread_id, NULL, request_handler, (void *)client_sock);
+        pthread_detach(thread_id);
 
         count++;
     }
@@ -81,6 +70,13 @@ int main()
     close(server_sock);
 
     return 0;
+}
+
+void *request_handler(void *p)
+{
+    int client_sock = (int)p;
+
+    response(&client_sock, request(&client_sock));
 }
 
 RESPONSE request(const int* sock)
