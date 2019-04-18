@@ -19,7 +19,6 @@ RESPONSE request(const int* sock);
 void response(const int* sock, RESPONSE response);
 RESPONSE get_content_by_url(const char* url);
 RESPONSE get_404();
-RESPONSE get_200();
 RESPONSE get_normal_response(const char* str);
 
 
@@ -48,17 +47,33 @@ int main()
         return -1;
     }
 
+    int pid;
     int count = 0;
     struct sockaddr_in client_addr;
 
-    while (count < 10) {
+    while (count < 10000) {
         socklen_t client_addr_size = sizeof(client_addr);
         int client_sock = accept(server_sock, (struct sockaddr*)&client_addr, &client_addr_size);
         if (client_sock == -1) {
             puts("响应失败");
+            continue;
         }
 
-        response(&client_sock, request(&client_sock));
+        // fork
+        pid = fork();
+        if (pid < 0) {
+            puts("子进程创建失败");
+            continue;
+        }
+
+        if (pid == 0) {
+            close(server_sock);
+            response(&client_sock, request(&client_sock));
+            printf("子进程处理完了, pid: %d\n", getpid());
+            exit(0);
+        } else {
+            close(client_sock);
+        }
 
         count++;
     }
@@ -86,8 +101,8 @@ RESPONSE request(const int* sock)
     // 解析HTTP请求路径
     strcpy(file_name, strtok(NULL, " /"));
 
-    puts("客户端请求的文件:");
-    puts(file_name);
+    //puts("客户端请求的文件:");
+    //puts(file_name);
 
     return get_content_by_url(file_name);
 }
