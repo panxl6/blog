@@ -105,7 +105,7 @@ Percentage of the requests served within a certain time (ms)
 ## 4. 并发模型(tpc,一个连接一个线程)
 
 ### 编译运行
-`g++ main.c -o main && main`
+`g++ main.c -o main -lpthread -fpermissive`
 
 ### 压测工具访问url
 ```bash
