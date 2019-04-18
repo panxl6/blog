@@ -1,6 +1,6 @@
 # 简单的静态文件web服务器
 
-## Hello world
+## 1. Hello world
 ### 编译运行
 `g++ main.c -o main && main`
 
@@ -13,7 +13,7 @@ Server: A Simple Web Server
 Content-Type: text/html
 ```
 
-## 根据url动态查找文件
+## 2. 根据url动态查找文件
 ### 替换html所在路径(用你的实际路径)
 `#define HTML_DIR "/home/panxl/CLionProjects/multiprocess/html/"`
 
