@@ -6,3 +6,4 @@
 3. [使用Go语言构建Python模块](https://github.com/panxl6/blog/tree/master/Building-python-modules-with-go)
 4. [使用PHP实现一个哈希表](https://github.com/panxl6/blog/blob/master/Write-hashtable-in-php/HashTable.php)
 5. [从零开始写一个web服务器](https://github.com/panxl6/blog/tree/master/Write-webserver)
+6. [PHP从入门到放弃]()
