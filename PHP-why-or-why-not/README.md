@@ -180,6 +180,8 @@ Callback first:
 1. array array_map  ( callback $callback  , array $arr1  [, array $...  ] )
 2. mixed call_user_func ( callback $function [, mixed $parameter [, mixed $... ]] )
 
+----------------------------------------------------------------------------------------------------------
+
 Needle last:
 1. int strpos ( string $haystack  , mixed $needle  [, int $offset= 0  ] )
 2. string stristr ( string $haystack , mixed $needle [, bool $before_needle = false ] )
