@@ -81,6 +81,103 @@ echo $i;
 
 ### “码分复用”，PHP对空状态的宽容带来的问题
 
+#### 概念升维
+在C语言家族中，错误码是很常见的一个概念。
+在java中，遇到问题就直接抛出一个异常。就只有一个概念。
+
+在C语言编程中，对于简单的问题，返回`triue`代表执行成功，返回`false`表示执行失败。但是，当我们需要更细的粒度是，`true`和`false`就不够用了，毕竟一位二进制只能表示两种可能。那么我们就扩充一下，返回一个十进制的`errno`变量吧。这样一来就发生了概念的维度上升。
+
+原来的`true`或者`false`仅仅表示系统错误(概念上对应于Java中的Error异常，不可预测的错误)，比如：mysql读取失败、redis读取失败、网络异常；errCode表示业务错误(对应于Java中的Exception，可以预测的错误)，比如：参数非法，输入不符合限制。
+
+```php
+// 版本1
+// 此时，$ret变量既表示返回结果的内容，又表示执行状况
+function getUserInfo()
+{
+	$ret = $redis->hget('hashName', $uid);
+	// 系统错误
+	if (!$ret)
+		return false;
+
+	// 业务逻辑错误
+	if (empty($ret['uid']))
+		return false;
+		
+	return true;
+}
+
+// 版本2
+class Test
+{
+	protected $errCode = 0;
+	function getUserInfo(&$data)
+	{
+		$ret = $redis->hget('hashName', $uid);
+
+		// 系统错误(redis读取异常)
+		if ($ret === false) {
+			return false;
+		}
+		
+		// 业务逻辑错误(缺少必要字段)
+		if (empty($ret['uid'])) {
+			$this->errCode = 10001;
+			return true;
+		}
+		
+		$data = $ret;
+		return true;
+	}
+}
+```
+
+
+## 状态码歧义
+
+```php
+function demo()
+{
+	$userInput = $_GET['user_input'];
+	
+	if (empty($userInput)) {
+		echo "用户投了否定票";
+		return false;
+	}
+
+	echo "用户投了支持票";
+	
+	return true;
+}
+```
+
+在应用中，我们一般使用枚举值来表示业务的状态。
+
+从上面的例子来看，会产生歧义。我们以0或者说空，作为否定票的标记，以非空的值作为支持票的定义。但是，如果前端把参数传丢了，我们就默认为用户投了否定票。
+
+而实际上是前端有bug。
+
+
+```php
+function demo()
+{
+	$userInput = $_GET['user_input'];
+	
+	if ($userInput == 1) {
+		echo "用户投了否定票";
+		return false;
+	}
+
+	if ($userInput == 2) {
+		echo "用户投了支持票";
+		return true;
+	}
+	
+	echo "未定义的参数";	
+	
+	return false;
+}
+```
+
 ### 引用，以及其他残留的C语言特性
 在Java、Python等一类较为现代的编程语言，都在极力的隐藏指针这个概念。但是PHP中，你还可以看到指针的影子。PHP里面可以使用引用。这样你就可以获取变量的地址，并传递变量的地址。跟Go语言中的指针一样，不能做变量的位移计算，是一个阉割版的指针。
 
@@ -222,7 +319,7 @@ if ($page_id == 0) {
 print "thank you for visiting!";
 ```
 
-另一方面，PHP报错的时候，只是给出了哪一行有问题，但并没有给出一个调用栈的信息。也就是说你的自己看代码，然后一路脑补。如果调用层次比较深，文件数量比较多，那就很头疼了。
+另一方面，PHP报错的时候，只是给出了哪一行有问题，但并没有给出一个调用栈的信息。也就是说你得自己看代码，然后一路脑补。如果调用层次比较深，文件数量比较多，那就很头疼了。
 
 ```
 PHP Notice:  Undefined variable: 0 in /home/ubuntu/Web/test/ErrorStack.php on line 5
