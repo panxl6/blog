@@ -126,10 +126,68 @@ Needle first:
 3. str_replace ( mixed $needle , mixed $replace , mixed $subject [, int &$count ] )
 ```
 
-
-
 ### 异常处理的不足
+
+
 ### 难以调试，错误信息对开发者不友好
+如果你合并代码，出现括号、双引号缺少了一个的情况，那么就会造成语法错误。本来语法错误，是最容易处理的。但是PHP的语法提示，却很容易误导你。
+
+比如，下面的错误其实是在第3行，但是语法错误却提示你在20行。
+
+```PHP Parse error:  syntax error, unexpected 'thank' (T_STRING) in /home/ubuntu/Projects/php/php_flaw/CompileDetail.php on line 20```
+
+```php
+<?php
+
+$string = "welcome to my personal home page;
+
+# a fake example; just imagine some lengthy code here
+if ($page_id == 0) {
+  render_home_page();
+} elseif ($page_id == 1) {
+  render_contacts_page();
+} elseif ($page_id == 2) {
+  render_about_page();
+} elseif ($page_id == 3) {
+  render_services_page();
+} elseif ($page_id == 4) {
+  render_weather_page();
+} elseif ($page_id == 5) {
+  render_news_page();
+}
+
+print "thank you for visiting!";
+```
+
+另一方面，PHP报错的时候，只是给出了哪一行有问题，但并没有给出一个调用栈的信息。也就是说你的自己看代码，然后一路脑补。如果调用层次比较深，文件数量比较多，那就很头疼了。
+
+```
+PHP Notice:  Undefined variable: 0 in /home/ubuntu/Web/test/ErrorStack.php on line 5
+PHP Notice:  Undefined variable:  in /home/ubuntu/Web/test/ErrorStack.php on line 5
+int(3)
+PHP Parse error:  syntax error, unexpected '$a' (T_VARIABLE) in /home/ubuntu/Web/test/classA.php on line 7
+```
+
+```php
+<?php
+
+function a($a)
+{
+    return $$$a + 1;
+}
+
+function b($a)
+{
+    return a($a) + 1;
+}
+
+function c($a)
+{
+    return b($a) + 1;
+}
+
+var_dump(c(0));
+```
 
 ## PHP在开发流程上带来的改变
 敏捷还是混乱？
