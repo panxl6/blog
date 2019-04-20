@@ -78,10 +78,42 @@ echo $i;
 如果你不留意这个现象（作用域被污染），那么就会出现计数器的初始值错误，或者变量值被覆盖等问题。
 
 ### 变量覆盖问题
+
+
 ### 动态类型一时爽
 ### “码分复用”，PHP对空状态的宽容带来的问题
+
 ### 引用，以及其他残留的C语言特性
+
 ### 内部库函数的命名方式和风格
+PHP上手快的一个原因，是它里面的各种高度封装的函数。但是，PHP里面的函数、类库的组织方式相比其他工业级标准语言要混乱得多。给你讲个笑话，某个PHP程序猿拍了一下脑袋苦思冥想。你猜他在干嘛？喂，那个很牛逼的函数，叫什么名字来着？
+
+#### 命名风格混乱
+有些是按C语言的单词下划线的方式命名的，有些是按面向对象大小写的方式命名的。剩下的就是没有风格的。
+
+```
+1. gettype() vs get_class()
+2. str_pos() str_replace() str_split() vs strcmp() strchr() strcasecmp()
+3. base64_encode() vs urlencode()
+4. htmlentities() vs html_entity_decode()
+5. swoole_server() vs Swoole\Server()
+```
+
+### 函数的参数签名混乱
+
+``` php
+Callback last:
+1. array array_filter  ( array $input  [, callback $callback  ] )
+2. array array_uintersect  ( array $array1  , array $array2  [, array $ ...  ], callback $data_compare_func  )
+3. bool usort  ( array &$array  , callback $cmp_function  )
+
+Callback first:
+1. array array_map  ( callback $callback  , array $arr1  [, array $...  ] )
+2. mixed call_user_func ( callback $function [, mixed $parameter [, mixed $... ]] )
+```
+
+
+
 ### 异常处理的不足
 ### 难以调试，错误信息对开发者不友好
 
