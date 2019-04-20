@@ -99,6 +99,18 @@ PHP上手快的一个原因，是它里面的各种高度封装的函数。但�
 5. swoole_server() vs Swoole\Server()
 ```
 
+### 函数的命名方式(前缀、缩写、类)
+PHP某个领域的库函数，有个多种多样的名称组织方式。下面以时间处理系列函数为例。
+
+
+
+```php
+1. void usleep  () vs mixed microtime  () // 单位缩写 vs 单词缩写
+2. strtolower() strtotime() strtoupper() vs ip2long () bin2hex() // 数字缩写 vs 单词
+3. date('Y-md') vs DateTime::createFromFormat('j-M-Y', '15-Feb-2009') // 全局函数 vs 静态类方法
+4. swoole_server() vs Swoole\Server() // 全局函数 vs 类
+```
+
 ### 函数的参数签名混乱
 这里的callback或者needle只是个例子，用于指示在一系列功能相关的接口中，具有相同含义的入参或者出参。
 
