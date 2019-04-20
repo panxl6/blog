@@ -85,6 +85,56 @@ echo $i;
 
 ### 引用，以及其他残留的C语言特性
 
+```php
+class Demo
+{
+    private $data = array(1, '', '', 2, 'string');
+
+    private function defaultParmaWithReference($index, &$b=array())
+    {
+        if ($index === null) {
+            return;
+        }
+
+        $b = $this->data[$index];
+    }
+
+    public function testReference()
+    {
+        $this->defaultParmaWithReference(0, $b);
+        var_dump('第一次调用：', $b);
+
+        $this->defaultParmaWithReference($a, $b);
+        var_dump('第二次调用：', $b);
+
+        $this->defaultParmaWithReference($a, $b);
+        var_dump('第三次调用：', $b);
+
+        $this->defaultParmaWithReference(3, $b);
+        var_dump('第四次调用：', $b);
+    }    
+}
+
+
+$demo = new Demo();
+$demo->testReference();
+```
+
+输出结果:
+
+```
+string(18) "第一次调用："
+int(1)
+PHP Notice:  Undefined variable: a in /home/ubuntu/Projects/php/php_flaw/DefaultParam.php on line 22
+string(18) "第二次调用："
+int(1)
+PHP Notice:  Undefined variable: a in /home/ubuntu/Projects/php/php_flaw/DefaultParam.php on line 25
+string(18) "第三次调用："
+int(1)
+string(18) "第四次调用："
+int(2)
+```
+
 ### 内部库函数的命名方式和风格
 PHP上手快的一个原因，是它里面的各种高度封装的函数。但是，PHP里面的函数、类库的组织方式相比其他工业级标准语言要混乱得多。给你讲个笑话，某个PHP程序猿拍了一下脑袋苦思冥想。你猜他在干嘛？喂，那个很牛逼的函数，叫什么名字来着？
 
@@ -99,8 +149,8 @@ PHP上手快的一个原因，是它里面的各种高度封装的函数。但�
 5. swoole_server() vs Swoole\Server()
 ```
 
-### 函数的命名方式(前缀、缩写、类)
-PHP某个领域的库函数，有这五花八门的名称组织方式。下面以时间处理系列函数为例。
+#### 函数的命名方式(前缀、缩写、类)
+PHP某个领域的库函数，有着五花八门的名称组织方式。下面以时间处理系列函数为例。
 
 
 ```php
@@ -110,7 +160,7 @@ PHP某个领域的库函数，有这五花八门的名称组织方式。下面�
 4. swoole_server() vs Swoole\Server() // 全局函数 vs 类
 ```
 
-### 函数的参数签名混乱
+#### 函数的参数签名混乱
 这里的callback或者needle只是个例子，用于指示在一系列功能相关的接口中，具有相同含义的入参或者出参。
 
 PHP类库的函数，一会儿把关注点放在前面，一会儿放在后面。使用者很难形成稳固的印象。你必须看文档，否则很容易出错。
