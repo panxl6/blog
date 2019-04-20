@@ -126,9 +126,6 @@ Needle first:
 3. str_replace ( mixed $needle , mixed $replace , mixed $subject [, int &$count ] )
 ```
 
-### 异常处理的不足
-
-
 ### 难以调试，错误信息对开发者不友好
 如果你合并代码，出现括号、双引号缺少了一个的情况，那么就会造成语法错误。本来语法错误，是最容易处理的。但是PHP的语法提示，却很容易误导你。
 
