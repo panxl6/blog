@@ -100,6 +100,11 @@ PHP上手快的一个原因，是它里面的各种高度封装的函数。但�
 ```
 
 ### 函数的参数签名混乱
+这里的callback或者needle只是个例子，用于指示在一系列功能相关的接口中，具有相同含义的入参或者出参。
+
+PHP类库的函数，一会儿把关注点放在前面，一会儿放在后面。使用者很难形成稳固的印象。你必须看文档，否则很容易出错。
+
+相比之下，C++的STL、Java的Collection类库，函数的入参出参是高度的一致。
 
 ``` php
 Callback last:
@@ -110,6 +115,15 @@ Callback last:
 Callback first:
 1. array array_map  ( callback $callback  , array $arr1  [, array $...  ] )
 2. mixed call_user_func ( callback $function [, mixed $parameter [, mixed $... ]] )
+
+Needle last:
+1. int strpos ( string $haystack  , mixed $needle  [, int $offset= 0  ] )
+2. string stristr ( string $haystack , mixed $needle [, bool $before_needle = false ] )
+
+Needle first:
+1. bool in_array  ( mixed $needle  , array $haystack  [, bool $strict  ] )
+2. mixed array_search  ( mixed $needle  , array $haystack  [, bool $strict  ] )
+3. str_replace ( mixed $needle , mixed $replace , mixed $subject [, int &$count ] )
 ```
 
 
