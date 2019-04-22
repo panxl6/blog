@@ -171,3 +171,5 @@ Percentage of the requests served within a certain time (ms)
 
 ## 参考文献
 1. [《Unix环境高级编程》](https://book.douban.com/subject/25900403/)
+2. [《Concurrent Programming for Scalable Web Architectures》](https://berb.github.io/diploma-thesis/original/)
+3. [《极客时间.从0开始学架构》](https://time.geekbang.org/column/article/8697)
