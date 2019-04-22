@@ -168,3 +168,6 @@ Percentage of the requests served within a certain time (ms)
 ```
 
 当并发连接数越来越多时，线程模型耗费的资源要比多进程模型小很多。
+
+## 参考文献
+1. [《Unix环境高级编程》](https://book.douban.com/subject/25900403/)
