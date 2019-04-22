@@ -427,6 +427,6 @@ PHP的维护者，更像是一群个体户。而Java的官方组织，更像是�
 
 
 ### 参考文献
-1. [taking php serious]()
-2. [php.net]()
-3. [php sadness]()
+1. [taking php serious](https://slack.engineering/taking-php-seriously-cf7a60065329)
+2. [php.net](https://php.net)
+3. [php sadness](http://phpsadness.com/)
