@@ -12,3 +12,13 @@
 
 ## 协议
 本专题中通篇使用的协议是很简单的。但是足以阐释清楚并发服务器设计的方方面面。
+
+
+## 串行服务器
+
+## 多个并发连接
+
+## 总结与下文的介绍
+
+
+[原文地址](https://eli.thegreenplace.net/2017/concurrent-servers-part-1-introduction/)
