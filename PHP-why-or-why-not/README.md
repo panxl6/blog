@@ -119,6 +119,7 @@ PHP对空状态的宽容，以及动态类型带来的灵活性，打破了一�
 
 原来的`true`或者`false`仅仅表示系统错误(概念上对应于Java中的Error异常，不可预测的错误)，比如：mysql读取失败、redis读取失败、网络异常；errCode表示业务错误(对应于Java中的Exception，可以预测的错误)，比如：参数非法，输入不符合限制。
 
+
 ```php
 // 版本1
 // 此时，$ret变量既表示返回结果的内容，又表示执行状况
@@ -414,7 +415,6 @@ php-fpm为每个请求分配一个进程。这样一来，就起到了沙箱隔�
 - [ ] 对比jvm虚拟机
 
 ### 万能的数组：成也萧何，败也萧何
-- [ ] 底层的哈希结构 
 
 ```java
 Map<Integer, Integer> map = new HashMap<Integer, Integer>();
