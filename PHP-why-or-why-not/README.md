@@ -31,7 +31,7 @@ echo "hello world";
 
 PHP的`hello world`可以有两种。一种是cli模式下的脚本语言，另一种是cgi模式下的模板语言。PHP的`hello world`里面特地添加了`<?php`标记来区分，或者说兼容这两种场景。
 
-在Java EE里面，模板语言跟java是另一回事。两者的文件后缀就不一样。一个是`.java`，了一个是`.jsp`。这样一来，java独立发展，jsp只是java的一个应用。
+在Java EE里面，模板语言跟java是另一回事。两者的文件后缀就不一样。一个是`.java`，另一个是`.jsp`。这样一来，java独立发展，jsp只是java的一个应用。
 
 而PHP，却把模板语言的功能融合到了语言本身。对于开发小型web应用来说，这种开箱即用的特性就代表了效率，尤其是在JavaScript到处是坑的年代。
 
@@ -416,6 +416,31 @@ php-fpm为每个请求分配一个进程。这样一来，就起到了沙箱隔�
 ### 万能的数组：成也萧何，败也萧何
 - [ ] 底层的哈希结构 
 
+```java
+Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+for (int k = 0; k < 100000; k++) {
+	map.put(k, k);
+}
+
+for (String key : map.keySet()) {
+	String value = map.get(key);
+	// do something
+}
+```
+上面的代码，第一步将10万条数据放到HashMap中；第二步，取出来用。这里有两个问题。
+
+1. resize问题。HashMap创建时，没有根据已知数据量进行初始化，导致后续的put操作需要执行多次的哈希表扩容操作。频繁的执行哈希表扩容操作，对CPU和垃圾收集都不友好。
+2. 在循环取元素时，没用使用EntrySet，而是用了keySet。导致map.get()操作中出现重复计算hash的操作。
+
+在`java`集合中，当HashMap的链表长度超过8时，会自动转为红黑树。数据量扩张导致的哈希表问题就没那么明显了。
+
+有了上面的应用背景，我们来对比一下PHP中的数组。
+
+虽然PHP也有SPL集合框架，但是应用最广泛的还是PHP的数组。PHP数组是一个有序字典。底层实现仅仅是一个哈希表。
+
+为了实现有序遍历，PHP的哈希表维护了一个全局的双向链表。同时，为了区分PHP数组的key是数字还是字符串，PHP底层的哈希表维护了两个哈希值--增加了两次哈希值计算。
+
+
 ### PHP扩展开发，真香？还是鸡肋？
 PHP语言的函数和功能都是较为粗粒度的。如果你需要改造PHP，以实现差异化的功能，有两种方式。
 
@@ -423,7 +448,7 @@ PHP语言的函数和功能都是较为粗粒度的。如果你需要改造PHP�
 
 PHP的维护者，更像是一群个体户。而Java的官方组织，更像是一家大企业。两者的差别导致了很多的问题。比如，前面提到的PHP库函数命名混乱，还有PHP发版时间不确定，而且更新升级较为缓慢等问题。
 
-增强PHP，或者改造PHP是一件做出来容易，做好很难的事情。你用C语言写了PHP扩展，后续的维护呢？比如swoole，swoole扩展要开发，php使用者也要更新自己的知识。这不见得是省事。
+增强PHP，或者改造PHP是一件做出来容易，做好很难的事情。你用C语言写了PHP扩展，后续的维护呢？比如swoole，swoole扩展要开发，php使用者也要更新自己的知识。这不见得省事。
 
 我们换一个思路，如果我们用Go语言来开发PHP扩展（比如swoole），那么扩展开发的效率要比用C语言时高一些。但是增强后的php的业务开发效率，跟Go语言开发业务的效率差别就不太大了。那么我们得到结论是，直接使用Go语言来开发业务，而不是PHP。
 
@@ -433,3 +458,5 @@ PHP的维护者，更像是一群个体户。而Java的官方组织，更像是�
 1. [taking php serious](https://slack.engineering/taking-php-seriously-cf7a60065329)
 2. [php.net](https://php.net)
 3. [php sadness](http://phpsadness.com/)
+4. [《大型网站性能优化实战》](https://book.douban.com/subject/30437260/)
+
