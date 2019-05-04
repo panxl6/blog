@@ -10,7 +10,7 @@ PHP，曾是2004年的[编程语言流行度排行榜](https://www.tiobe.com/tio
 
 ## 历史
 
-PHP，最早的叫法是*Personal Home Page Tools*。它的定位是个人主页开发工具，跟java的企业级开发语言，在起初的定位就有着很大的差别。发展到现在，它已经改名叫*Hypertext Preprocessor*。尽管它吸收了C、Java、Perl等语言的一些语法特性，并且在web应用的快速、敏捷开发中有着成功的范例(LNMP)，但是它如今的比较优势已经没有那么明显了。
+PHP，最早的叫法是*Personal Home Page Tools*。它的定位是个人主页开发工具，跟java这样的企业级开发语言相比，在起初的定位上就有着很大的差别。发展到现在，它已经改名叫*Hypertext Preprocessor*。尽管它吸收了C、Java、Perl等语言的一些语法特性，并且在web应用的快速、敏捷开发中有着成功的范例(LNMP)，但是它如今的比较优势已经没有那么明显了。
 
 ---------------------
 
