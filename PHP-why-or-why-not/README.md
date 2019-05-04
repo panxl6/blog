@@ -1,6 +1,6 @@
 # PHP是世界上最好的语言吗？
 
-PHP，从2004年的[编程语言流行度排行榜](https://www.tiobe.com/tiobe-index/)的winner，而如今（2019年）将要跌出top 10，它都面临着什么样的问题？从2012年，iPhone引领的移动互联网兴起之后，后端开发新秀有，Golang、NodeJS、rust、kotlin等。而老牌的java，也随着spring boot，spring cloud一类的优秀框架的生态繁荣，也进入了新的增长期。PHP似乎不再是世界上最好的语言了，我们一起来反思一下。
+PHP，曾是2004年的[编程语言流行度排行榜](https://www.tiobe.com/tiobe-index/)的winner，而如今（2019年）将要跌出top 10，它都面临着什么样的问题？从2012年起，iPhone引领的移动互联网兴起之后，后端开发新秀有：Golang、NodeJS、rust、kotlin等。而老牌的java，也随着spring boot，spring cloud一类的优秀框架的生态繁荣，也进入了新的增长期。PHP似乎不再是世界上最好的语言了，我们一起来反思一下。
 
 - 历史
 - 从`hello world`说起
