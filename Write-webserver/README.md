@@ -169,6 +169,12 @@ Percentage of the requests served within a certain time (ms)
 
 当并发连接数越来越多时，线程模型耗费的资源要比多进程模型小很多。
 
+
+## 验证一些已有的并发模型
+- [ ] PHP-fpm进程模型
+- [ ] Nginx进程（并发模型）
+- [ ] 线程池/进程池模型
+
 ## 参考文献
 1. [《Unix环境高级编程》](https://book.douban.com/subject/25900403/)
 2. [《Concurrent Programming for Scalable Web Architectures》](https://berb.github.io/diploma-thesis/original/)
