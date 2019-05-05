@@ -95,7 +95,6 @@ void *request_handler(void *p)
 ```
 
 #### 一个变量做多件事情
-如果一个变量
 ```php
 $a = 'userName'; // 用户输入
 
