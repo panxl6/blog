@@ -8,3 +8,4 @@
 5. [从零开始写一个web服务器](https://github.com/panxl6/blog/tree/master/Write-webserver)
 6. [PHP是世界上最好的语言吗？](https://github.com/panxl6/blog/blob/master/PHP-why-or-why-not/README.md)
 7. [【翻译】支持并发的服务器](https://github.com/panxl6/blog/tree/master/Concurrent-servers/README.md)
+8. [使用Deepin 20作为开发桌面](https://github.com/panxl6/blog/tree/master/Deepin20-for-development)
