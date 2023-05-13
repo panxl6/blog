@@ -9,3 +9,4 @@
 6. [PHP是世界上最好的语言吗？](https://github.com/panxl6/blog/blob/master/PHP-why-or-why-not/README.md)
 7. [【翻译】支持并发的服务器](https://github.com/panxl6/blog/tree/master/Concurrent-servers/README.md)
 8. [使用Deepin 20作为开发桌面](https://github.com/panxl6/blog/tree/master/Deepin20-for-development)
+9. [Go语言是面向对象的吗？](https://github.com/panxl6/blog/blob/master/Go%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%97%EF%BC%9FYes%2Band%2Bno!.pdf)
